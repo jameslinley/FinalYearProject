@@ -5,4 +5,5 @@
     <string name="testButton">Button</string>
     <string name="press">Press</string>
     <string name="to_main">to Main</string>
+    <string name="button_to_nav_to_calendar_fragment">Button to nav to Calendar Fragment</string>
 </resources>

@@ -16,14 +16,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/testButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/press"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageButton
+        android:id="@+id/calButton"
+        android:layout_width="326dp"
+        android:layout_height="208dp"
+        android:layout_marginTop="28dp"
+        android:background="#FFFFFF"
+        android:contentDescription="@string/button_to_nav_to_calendar_fragment"
+        android:cropToPadding="true"
+        android:scaleType="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:srcCompat="@drawable/baseline_today_black_48dp" />
+
+    <ImageButton
+        android:id="@+id/messagesButton"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calButton"
+        app:srcCompat="@drawable/baseline_chat_black_48dp" />
+
+    <ImageButton
+        android:id="@+id/notificationsButton"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calButton"
+        app:srcCompat="@drawable/baseline_assignment_black_48dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

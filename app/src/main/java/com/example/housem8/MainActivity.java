@@ -9,15 +9,18 @@ import androidx.navigation.Navigation;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button testButton;
+    ImageButton calButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         toolBar();
         calFrag();
 
@@ -31,15 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
     //method to change to fragment once button is clicked
     public void calFrag(){
-        testButton = findViewById(R.id.testButton);
-        
-        testButton.setOnClickListener(new View.OnClickListener() {
+        Calendar cal = new Calendar(); //may need to move this
+        calButton = findViewById(R.id.calButton);
+        calButton.setOnClickListener(v -> {
+            calButton.setVisibility(View.GONE);
 
-            public void onClick(View v){
-                Calendar cal = new Calendar();
-                FragmentManager manager = getSupportFragmentManager();
-                manager.beginTransaction().add(R.id.mainLayout, cal).commit();
-            }
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().add(R.id.mainLayout, cal).commit();
         });
 
         
