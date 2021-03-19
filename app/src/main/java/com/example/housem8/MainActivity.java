@@ -25,31 +25,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        toolBar();
 
         calButton = findViewById(R.id.calButton);
-        calButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toCalendarActivity();
-            }
-        });
-
         mesButton = findViewById(R.id.mesButton);
-        mesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toMessagesActivity();
-            }
-        });
-
         notButton = findViewById(R.id.notButton);
-        notButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toNoticeboardActivity();
-            }
-        });
+
+        toolBar();
+        CalendarMessageSetUp();
+        MessageButtonSetUp();
+        NoticeboardButtonSetUp();
+
     }
 
     //method to show toolbar on each page
@@ -58,30 +43,35 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    public void toCalendarActivity(){
-        Intent intent = new Intent(this, CalendarActivity.class);
-        startActivity(intent);
+    //methods to navigate to certain Activities
+    public void CalendarMessageSetUp(){
+        calButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CalendarActivity.class));
+            }
+        });
     }
 
-    public void toMessagesActivity(){
-        Intent intent = new Intent(this, MessagesActivity.class);
-        startActivity(intent);
+    public void MessageButtonSetUp(){
+        mesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MessagesActivity.class));
+            }
+        });
     }
 
-    public void toNoticeboardActivity(){
-        Intent intent = new Intent(this, NoticeboardActivity.class);
-        startActivity(intent);
+    public void NoticeboardButtonSetUp(){
+        notButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, NoticeboardActivity.class));
+            }
+        });
     }
 
 
-//    public void toNoticeboard(){
-//        notButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, NoticeboardActivity.class));
-//            }
-//        });
-//    }
 
 
 
