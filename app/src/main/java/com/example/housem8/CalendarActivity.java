@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    Button toMainButton;
+    private Button toMainButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +20,6 @@ public class CalendarActivity extends AppCompatActivity {
 
         toolBar();
         toMain();
-
-
     }
 
     public void toolBar(){

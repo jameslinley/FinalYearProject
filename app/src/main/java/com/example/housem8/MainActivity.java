@@ -25,14 +25,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        calButton = findViewById(R.id.calButton);
-        mesButton = findViewById(R.id.mesButton);
-        notButton = findViewById(R.id.notButton);
-//        noticeboard = new Noticeboard();
-
         toolBar();
-        toCalendar();
 
+        calButton = findViewById(R.id.calButton);
+        calButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toCalendarActivity();
+            }
+        });
+
+        mesButton = findViewById(R.id.mesButton);
+        mesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toMessagesActivity();
+            }
+        });
+
+        notButton = findViewById(R.id.notButton);
+        notButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toNoticeboardActivity();
+            }
+        });
     }
 
     //method to show toolbar on each page
@@ -41,51 +58,30 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    public void toCalendar(){
-        calButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CalendarActivity.class));
-            }
-        });
+    public void toCalendarActivity(){
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
     }
 
-    //method to change to fragment once button is clicked
-//    public void calFrag(){
-//        Calendar cal = new Calendar(); //may need to move this
-//
-//        calButton.setOnClickListener(v -> {
-//            calButton.setVisibility(View.GONE);
-//            mesButton.setVisibility(View.GONE);
-//            notButton.setVisibility(View.GONE);
-//            FragmentManager manager = getSupportFragmentManager();
-//            manager.beginTransaction().add(R.id.mainLayout, cal).commit();
+    public void toMessagesActivity(){
+        Intent intent = new Intent(this, MessagesActivity.class);
+        startActivity(intent);
+    }
+
+    public void toNoticeboardActivity(){
+        Intent intent = new Intent(this, NoticeboardActivity.class);
+        startActivity(intent);
+    }
+
+
+//    public void toNoticeboard(){
+//        notButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(MainActivity.this, NoticeboardActivity.class));
+//            }
 //        });
 //    }
-
-    public void mesFrag(){
-        Messages mes = new Messages(); //may need to move this
-
-        mesButton.setOnClickListener(v -> {
-            calButton.setVisibility(View.GONE);
-            mesButton.setVisibility(View.GONE);
-            notButton.setVisibility(View.GONE);
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().add(R.id.mainLayout, mes).commit();
-        });
-    }
-
-    public void notFrag(){
-        Noticeboard noticeboard = new Noticeboard(); //may need to move this
-
-        notButton.setOnClickListener(v -> {
-            calButton.setVisibility(View.GONE);
-            mesButton.setVisibility(View.GONE);
-            notButton.setVisibility(View.GONE);
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().add(R.id.mainLayout, noticeboard).commit();
-        });
-    }
 
 
 
