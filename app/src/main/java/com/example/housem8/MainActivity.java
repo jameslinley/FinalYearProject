@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+
         calButton = findViewById(R.id.calButton);
         mesButton = findViewById(R.id.mesButton);
         notButton = findViewById(R.id.notButton);

@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HouseM8">
-        <activity android:name=".NoticeboardActivity"></activity>
+        <activity android:name=".FirebaseUIActivity"></activity>
+        <activity android:name=".NoticeboardActivity" />
         <activity android:name=".MessagesActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".MainActivity">
