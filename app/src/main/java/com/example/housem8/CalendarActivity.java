@@ -7,16 +7,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 
 public class CalendarActivity extends AppCompatActivity {
 
     private Button toMainButton;
+    private CalendarView calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         toMainButton = findViewById(R.id.toMainButton);
+        calendar = findViewById(R.id.calendarView);
 
         toolBar();
         toMain();
