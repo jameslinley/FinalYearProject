@@ -9,6 +9,8 @@ import androidx.navigation.Navigation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
 
         calButton = findViewById(R.id.calButton);
@@ -72,6 +75,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu m) {
+        getMenuInflater().inflate(R.menu.settings_menu, m);
+        return true;
+    }
+    
+    public boolean onOptionsItemSelected(MenuItem m) {
+        if (m.getItemId() == R.id.settings_menu_item) {
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+        }
+        return super.onOptionsItemSelected(m);
+    }
 
 
 

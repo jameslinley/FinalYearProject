@@ -23,4 +23,7 @@
     <string name="register">Register</string>
     <string name="log_in">Log in</string>
     <string name="already_registered_log_in_here">Already registered? Log in here</string>
+    <string name="settings_menu_item">Settings Menu Item</string>
+    <string name="housem8">HouseM8</string>
+    <string name="log_out">log out</string>
 </resources>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/mainLayout"
+    android:background="@color/white"
     tools:context=".MainActivity" >
 
     <include
@@ -21,7 +22,7 @@
         android:layout_width="325dp"
         android:layout_height="200dp"
         android:layout_marginTop="28dp"
-        android:background="#FFFFFF"
+        android:background="@color/fui_transparent"
         android:contentDescription="@string/button_to_nav_to_calendar_fragment"
         android:cropToPadding="true"
         android:scaleType="center"
@@ -35,7 +36,7 @@
         android:layout_width="325dp"
         android:layout_height="200dp"
         android:layout_marginTop="28dp"
-        android:background="#FFFFFF"
+        android:background="@color/fui_transparent"
         android:scaleType="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +48,7 @@
         android:layout_width="325dp"
         android:layout_height="200dp"
         android:layout_marginTop="28dp"
-        android:background="#FFFFFF"
+        android:background="@color/fui_transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mesButton"

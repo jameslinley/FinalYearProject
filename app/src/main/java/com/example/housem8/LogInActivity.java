@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,8 @@ public class LogInActivity extends AppCompatActivity {
         alreadyRegisteredTxt = findViewById(R.id.text_have_account);
         isRegistered = true;
 
+
+        loggedIn();
         isRegistered();
         setUpBtns();
     }
@@ -99,11 +102,19 @@ public class LogInActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(LogInActivity.this, "Log in successful", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LogInActivity.this, MainActivity.class));
                 } else {
                     Toast.makeText(LogInActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    public void loggedIn(){
+        if (FirebaseAuth.getInstance().getCurrentUser()!=null){
+            startActivity(new Intent(LogInActivity.this, MainActivity.class));
+            finish();
+        }
     }
 
 }

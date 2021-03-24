@@ -11,17 +11,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HouseM8">
-        <activity android:name=".MainActivity"
-            android:screenOrientation = "portrait"/>
-        <activity android:name=".NoticeboardActivity"
-            android:screenOrientation = "portrait"/>
-        <activity android:name=".MessagesActivity"
-            android:screenOrientation = "portrait"/>
-        <activity android:name=".CalendarActivity"
-            android:screenOrientation = "portrait"/>
-        <activity android:name=".LogInActivity"
-            android:screenOrientation = "portrait">
-
+        <activity
+            android:name=".SettingsActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NoticeboardActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".MessagesActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".CalendarActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".LogInActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
