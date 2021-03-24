@@ -1,5 +1,6 @@
 package com.example.housem8;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -9,6 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -31,13 +38,14 @@ public class LogInActivity extends AppCompatActivity {
         isRegistered = true;
 
         isRegistered();
+        setUpBtns();
     }
 
     public void isRegistered(){
         alreadyRegisteredTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                if (isRegistered == true){
+                if (isRegistered){
                     isRegistered = false;
                     registerBtn.setText("Log in");
                     alreadyRegisteredTxt.setText("Don't have an account? Register here");
@@ -47,6 +55,52 @@ public class LogInActivity extends AppCompatActivity {
                     registerBtn.setText("Register");
                     alreadyRegisteredTxt.setText("Already registered? Log in here");
                     nameTxt.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+    }
+
+    public void setUpBtns() {
+        registerBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if(isRegistered){
+                    register();
+                } else {
+                    logIn();
+                }
+            }
+        });
+    }
+
+    public void register(){
+        FirebaseAuth
+                .getInstance()
+                .createUserWithEmailAndPassword(emailTxt
+                .getText()
+                .toString(), pwordTxt
+                .getText()
+                .toString())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(LogInActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LogInActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public void logIn(){
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(emailTxt.getText().toString(), pwordTxt.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(LogInActivity.this, "Log in successful", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LogInActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
