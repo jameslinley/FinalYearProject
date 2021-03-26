@@ -1,13 +1,13 @@
 package com.example.housem8;
 
-public class MessageHolder {
+public class Chat {
     private String user;
     private String altUser;
     private String content;
     
-    public MessageHolder() {}
+    public Chat() {}
 
-    public MessageHolder(String user, String altUser, String content){
+    public Chat(String user, String altUser, String content){
         this.user = user;
         this.altUser = altUser;
         this.content = content;

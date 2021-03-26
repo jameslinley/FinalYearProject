@@ -25,7 +25,60 @@
         app:layout_constraintBottom_toTopOf="@+id/messageTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" >
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/name_of_sender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Name"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/received_by_user"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/received_by_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/received_message"
+        android:fontFamily="@font/lato"
+        android:maxWidth="300dp"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:text="This is a test message"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/sent_by_user"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/sent_by_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/sent_message"
+        android:maxWidth="300dp"
+        android:padding="10dp"
+        android:text="This is what a sent message would look like, do you like it?"
+        android:textColor="@color/white"
+        android:fontFamily="@font/lato"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/messageTxt"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/messageTxt"
@@ -65,7 +118,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/baseline_send_black_48dp"
+        android:background="@drawable/send_button"
         android:contentDescription="@string/button_to_send_message"
         android:padding="20dp"
         android:scaleType="fitCenter"

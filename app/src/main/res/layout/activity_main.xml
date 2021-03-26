@@ -25,11 +25,11 @@
         android:background="@drawable/main_button_layout"
         android:contentDescription="@string/button_to_nav_to_calendar_fragment"
         android:cropToPadding="true"
-        android:scaleType="center"
+        android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:srcCompat="@drawable/baseline_today_black_48dp" />
+        app:srcCompat="@drawable/calendar_button" />
 
     <TextView
         android:id="@+id/CalTitleTxt"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="@+id/calButton"
         app:layout_constraintStart_toStartOf="@+id/calButton"
         app:layout_constraintTop_toBottomOf="@+id/calButton"
-        app:srcCompat="@drawable/baseline_chat_black_48dp" />
+        app:srcCompat="@drawable/messages_button"/>
 
     <TextView
         android:id="@+id/MesTitleTxt"
@@ -69,7 +69,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/mesButton"
         app:layout_constraintEnd_toEndOf="@+id/mesButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/mesButton" />
+        app:layout_constraintStart_toStartOf="@+id/mesButton"
+        />
 
     <ImageButton
         android:id="@+id/notButton"
@@ -80,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="@+id/mesButton"
         app:layout_constraintStart_toStartOf="@+id/mesButton"
         app:layout_constraintTop_toBottomOf="@+id/mesButton"
-        app:srcCompat="@drawable/baseline_assignment_black_48dp" />
+        app:srcCompat="@drawable/noticeboard_button" />
 
     <TextView
         android:id="@+id/NotTitleTxt"

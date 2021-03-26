@@ -9,10 +9,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -22,9 +31,14 @@ public class MessagesActivity extends AppCompatActivity {
     private EditText mesTxtEt;
     private ImageButton sendBtn;
     private RecyclerView recView;
-    private TextView userName;
-    private ArrayList<MessageHolder> messages;
+    private TextView senderName;
+    private TextView recipientName;
+    private TextView testText;
+    private ArrayList<Chat> messages;
     private ArrayList<String> users;
+    private com.google.firebase.auth.FirebaseUser FirebaseUser;
+    private DatabaseReference databaseReference;
+    private String uid;
 
     private static final String CURRENT_TEXT = "currentText";
 
@@ -40,27 +54,23 @@ public class MessagesActivity extends AppCompatActivity {
         messages = new ArrayList<>();
         users = new ArrayList<>();
 
+        testText = findViewById(R.id.sent_by_user);
+
+        //senderName =
+        //recipientName =
+        FirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        uid = FirebaseUser.getUid();
+
 
         
         toolBar();
+        sendMessage();
 
 
 
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState){
-        super.onSaveInstanceState(outState);
-        CharSequence unsaved = mesTxtEt.getText();
-        outState.putCharSequence(CURRENT_TEXT, unsaved);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        CharSequence saved = savedInstanceState.getCharSequence(CURRENT_TEXT);
-        mesTxtEt.setText(saved);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu m) {
@@ -81,6 +91,34 @@ public class MessagesActivity extends AppCompatActivity {
 
         //below was getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+    
+    public void sendMessage(){
+        sendBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                testText.setText(mesTxtEt.getText().toString());
+                mesTxtEt.setText("");
+            }
+        });
+    }
+
+    public void displayName(){
+        databaseReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserProperties userProperties = snapshot.getValue(UserProperties.class);
+                if(userProperties != null){
+                    String name = userProperties.getName();
+                    recipientName.setText(name);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }
