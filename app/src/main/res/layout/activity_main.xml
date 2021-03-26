@@ -19,10 +19,10 @@
 
     <ImageButton
         android:id="@+id/calButton"
-        android:layout_width="325dp"
-        android:layout_height="200dp"
+        android:layout_width="300dp"
+        android:layout_height="175dp"
         android:layout_marginTop="28dp"
-        android:background="@color/fui_transparent"
+        android:background="@drawable/main_button_layout"
         android:contentDescription="@string/button_to_nav_to_calendar_fragment"
         android:cropToPadding="true"
         android:scaleType="center"
@@ -31,27 +31,71 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@drawable/baseline_today_black_48dp" />
 
+    <TextView
+        android:id="@+id/CalTitleTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/lato"
+        android:text="Calendar"
+        android:textColor="@color/charcoal"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/calButton"
+        app:layout_constraintEnd_toEndOf="@+id/calButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/calButton" />
+
     <ImageButton
         android:id="@+id/mesButton"
-        android:layout_width="325dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="28dp"
-        android:background="@color/fui_transparent"
+        android:layout_width="300dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/main_button_layout"
         android:scaleType="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/calButton"
+        app:layout_constraintStart_toStartOf="@+id/calButton"
         app:layout_constraintTop_toBottomOf="@+id/calButton"
         app:srcCompat="@drawable/baseline_chat_black_48dp" />
 
+    <TextView
+        android:id="@+id/MesTitleTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/lato"
+        android:text="Messages"
+        android:textColor="@color/charcoal"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mesButton"
+        app:layout_constraintEnd_toEndOf="@+id/mesButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/mesButton" />
+
     <ImageButton
         android:id="@+id/notButton"
-        android:layout_width="325dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="28dp"
-        android:background="@color/fui_transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="300dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/main_button_layout"
+        app:layout_constraintEnd_toEndOf="@+id/mesButton"
+        app:layout_constraintStart_toStartOf="@+id/mesButton"
         app:layout_constraintTop_toBottomOf="@+id/mesButton"
         app:srcCompat="@drawable/baseline_assignment_black_48dp" />
+
+    <TextView
+        android:id="@+id/NotTitleTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/lato"
+        android:text="Noticeboard"
+        android:textColor="@color/charcoal"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/notButton"
+        app:layout_constraintEnd_toEndOf="@+id/notButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/notButton" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

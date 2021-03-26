@@ -9,21 +9,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.Objects;
 
 public class NoticeboardActivity extends AppCompatActivity {
 
-    private Button toMainButton;
+    private ImageView addNoticeBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticeboard);
-        toMainButton = findViewById(R.id.button);
+        addNoticeBtn = findViewById(R.id.addNotice);
 
         toolBar();
-        toMain();
+        addNotice();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu m) {
@@ -46,11 +49,11 @@ public class NoticeboardActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
-    public void toMain(){
-        toMainButton.setOnClickListener(new View.OnClickListener() {
+    public void addNotice(){
+        addNoticeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NoticeboardActivity.this, MainActivity.class));
+                startActivity(new Intent(NoticeboardActivity.this, AddNotice.class));
             }
         });
     }

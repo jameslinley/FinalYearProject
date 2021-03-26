@@ -15,18 +15,15 @@ import java.util.Objects;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    private Button toMainButton;
     private CalendarView calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-        toMainButton = findViewById(R.id.toMainButton);
         calendar = findViewById(R.id.calendarView);
 
         toolBar();
-        toMain();
     }
 
     @Override
@@ -49,14 +46,5 @@ public class CalendarActivity extends AppCompatActivity {
 
         //below was getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-    }
-
-    public void toMain(){
-        toMainButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CalendarActivity.this, MainActivity.class));
-            }
-        });
     }
 }

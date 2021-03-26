@@ -26,4 +26,6 @@
     <string name="settings_menu_item">Settings Menu Item</string>
     <string name="housem8">HouseM8</string>
     <string name="log_out">log out</string>
+    <string name="forgotten_password">Forgotten password?</string>
+    <string name="textview">TextView</string>
 </resources>

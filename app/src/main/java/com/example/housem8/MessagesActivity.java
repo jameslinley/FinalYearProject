@@ -1,33 +1,30 @@
 package com.example.housem8;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.TextView;
 
 
-import com.google.firebase.analytics.FirebaseAnalytics;
-
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Random;
 
 public class MessagesActivity extends AppCompatActivity {
 
-    private FirebaseAnalytics mFirebaseAnalytics;
     private EditText mesTxtEt;
     private ImageButton sendBtn;
+    private RecyclerView recView;
+    private TextView userName;
+    private ArrayList<MessageHolder> messages;
+    private ArrayList<String> users;
 
     private static final String CURRENT_TEXT = "currentText";
 
@@ -39,7 +36,9 @@ public class MessagesActivity extends AppCompatActivity {
         
         mesTxtEt = findViewById(R.id.messageTxt);
         sendBtn = findViewById(R.id.sendButton);
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        recView = findViewById(R.id.RecMessages);
+        messages = new ArrayList<>();
+        users = new ArrayList<>();
 
 
         

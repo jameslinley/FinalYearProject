@@ -17,12 +17,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LogInActivity extends AppCompatActivity {
 
     private EditText nameTxt, emailTxt, pwordTxt;
     private Button registerBtn;
-    private TextView alreadyRegisteredTxt;
+    private TextView alreadyRegisteredTxt, forgottenPasswordTxt;
     private boolean isRegistered;
 
     @Override
@@ -36,13 +37,14 @@ public class LogInActivity extends AppCompatActivity {
         pwordTxt = findViewById(R.id.edit_password);
         registerBtn = findViewById(R.id.button_register);
         alreadyRegisteredTxt = findViewById(R.id.text_have_account);
+        forgottenPasswordTxt = findViewById(R.id.forgotten_password);
         isRegistered = true;
-
 
         loggedIn();
         isRegistered();
         setUpBtns();
     }
+
 
     public void isRegistered(){
         alreadyRegisteredTxt.setOnClickListener(new View.OnClickListener() {
@@ -77,23 +79,36 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     public void register(){
-        FirebaseAuth
-                .getInstance()
-                .createUserWithEmailAndPassword(emailTxt
-                .getText()
-                .toString(), pwordTxt
-                .getText()
-                .toString())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(LogInActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(LogInActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        if (emailTxt.getText().toString().isEmpty()) {
+            Toast.makeText(LogInActivity.this, "Email field is empty", Toast.LENGTH_SHORT).show();
+        } else if (pwordTxt.getText().toString().isEmpty()){
+            Toast.makeText(LogInActivity.this, "Password field is empty", Toast.LENGTH_SHORT).show();
+        } else if (nameTxt.getText().toString().isEmpty()){
+            Toast.makeText(LogInActivity.this, "Name field is empty", Toast.LENGTH_SHORT).show();
+        } else {
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailTxt.getText().toString(), pwordTxt.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        FirebaseDatabase.getInstance().getReference("user/"+FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(new UserProperties(nameTxt.getText().toString(), emailTxt.getText().toString()));
+                        Toast.makeText(LogInActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                        postRegistered();
+                    } else {
+                        Toast.makeText(LogInActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }
+
+    }
+
+    public void postRegistered(){
+        isRegistered = false;
+        registerBtn.setText("Log in");
+        alreadyRegisteredTxt.setText("Don't have an account? Register here");
+        nameTxt.setVisibility(View.GONE);
+        emailTxt.setText("");
+        pwordTxt.setText("");
     }
 
     public void logIn(){
