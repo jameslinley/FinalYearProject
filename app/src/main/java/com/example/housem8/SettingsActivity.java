@@ -19,11 +19,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class SettingsActivity extends AppCompatActivity {
 
     private Button logoutBtn;
-    private TextView dname;
+    private TextView dname, houseIDTxt;
     private FirebaseUser FirebaseUser;
     private DatabaseReference databaseReference;
     private String uid;
@@ -35,6 +36,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         logoutBtn = findViewById(R.id.logout_button);
         dname = findViewById(R.id.test);
+        houseIDTxt = findViewById(R.id.houseIDTxt);
         FirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("user");
         uid = FirebaseUser.getUid();
@@ -42,6 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
         toolBar();
         logOut();
         displayName();
+        setHouseID();
     }
     public void toolBar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -66,9 +69,9 @@ public class SettingsActivity extends AppCompatActivity {
         databaseReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserProperties userProperties = snapshot.getValue(UserProperties.class);
-                if(userProperties != null){
-                    String name = userProperties.getName();
+                HouseMate houseMate = snapshot.getValue(HouseMate.class);
+                if(houseMate != null){
+                    String name = houseMate.getName();
                     dname.setText(name);
                 }
             }
@@ -79,5 +82,25 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void setHouseID(){
+        databaseReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HouseMate houseMate = snapshot.getValue(HouseMate.class);
+                if(houseMate != null){
+                    String hID = houseMate.getHouseID();
+                    houseIDTxt.setText(hID);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
 
 }

@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HouseM8">
         <activity
+            android:name=".HouseMateActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".AddNotice"
             android:parentActivityName=".NoticeboardActivity"
             android:screenOrientation="portrait" />
@@ -36,8 +40,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".LogInActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

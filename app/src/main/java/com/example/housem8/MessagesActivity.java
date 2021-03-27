@@ -9,14 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,16 +29,15 @@ public class MessagesActivity extends AppCompatActivity {
     private EditText mesTxtEt;
     private ImageButton sendBtn;
     private RecyclerView recView;
-    private TextView senderName;
-    private TextView recipientName;
-    private TextView testText;
+    private TextView housemateNameTextView;
     private ArrayList<Chat> messages;
-    private ArrayList<String> users;
+    private ArrayList<String> housemates;
+    private ArrayList<Integer> houseIDs;
     private com.google.firebase.auth.FirebaseUser FirebaseUser;
     private DatabaseReference databaseReference;
     private String uid;
+    private String housemateNameString, housemateEmail, houseId;
 
-    private static final String CURRENT_TEXT = "currentText";
 
 
     @Override
@@ -50,11 +47,14 @@ public class MessagesActivity extends AppCompatActivity {
         
         mesTxtEt = findViewById(R.id.messageTxt);
         sendBtn = findViewById(R.id.sendButton);
-        recView = findViewById(R.id.RecMessages);
+        recView = findViewById(R.id.RecyclerMessages);
         messages = new ArrayList<>();
-        users = new ArrayList<>();
+        housemates = new ArrayList<>();
+        houseIDs = new ArrayList<>();
 
-        testText = findViewById(R.id.sent_by_user);
+        housemateNameString = getIntent().getStringExtra("housemate_name");
+        housemateEmail = getIntent().getStringExtra("housemate_email");
+        housemateNameTextView.setText(housemateNameString);
 
         //senderName =
         //recipientName =
@@ -65,7 +65,6 @@ public class MessagesActivity extends AppCompatActivity {
 
         
         toolBar();
-        sendMessage();
 
 
 
@@ -92,33 +91,6 @@ public class MessagesActivity extends AppCompatActivity {
         //below was getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
-    
-    public void sendMessage(){
-        sendBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                testText.setText(mesTxtEt.getText().toString());
-                mesTxtEt.setText("");
-            }
-        });
-    }
 
-    public void displayName(){
-        databaseReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserProperties userProperties = snapshot.getValue(UserProperties.class);
-                if(userProperties != null){
-                    String name = userProperties.getName();
-                    recipientName.setText(name);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
 }

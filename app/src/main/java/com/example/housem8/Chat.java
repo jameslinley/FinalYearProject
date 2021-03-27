@@ -1,32 +1,34 @@
 package com.example.housem8;
 
 public class Chat {
-    private String user;
-    private String altUser;
+    private String sender;
+    private String receiver;
     private String content;
-    
-    public Chat() {}
 
-    public Chat(String user, String altUser, String content){
-        this.user = user;
-        this.altUser = altUser;
+    public Chat() {
+
+    }
+
+    public Chat(String sender, String receiver, String content) {
+        this.sender = sender;
+        this.receiver = receiver;
         this.content = content;
     }
 
-    public String getUser() {
-        return user;
+    public String getSender() {
+        return sender;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public String getAltUser() {
-        return altUser;
+    public String getReceiver() {
+        return receiver;
     }
 
-    public void setAltUser(String altUser) {
-        this.altUser = altUser;
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
 
     public String getContent() {

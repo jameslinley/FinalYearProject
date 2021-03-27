@@ -3,7 +3,6 @@ package com.example.housem8;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -90,7 +89,7 @@ public class LogInActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        FirebaseDatabase.getInstance().getReference("user/"+FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(new UserProperties(nameTxt.getText().toString(), emailTxt.getText().toString()));
+                        FirebaseDatabase.getInstance().getReference("user/"+FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(new HouseMate(nameTxt.getText().toString(), emailTxt.getText().toString()));
                         Toast.makeText(LogInActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                         postRegistered();
                     } else {
