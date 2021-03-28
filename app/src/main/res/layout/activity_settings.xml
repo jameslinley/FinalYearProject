@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
+    <TextView
+        android:id="@+id/housemateIDTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/houseid"
+        app:layout_constraintEnd_toEndOf="@+id/houseIDTxt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/houseIDTxt"
+        app:layout_constraintTop_toBottomOf="@+id/houseIDTxt" />
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
@@ -42,7 +53,7 @@
         android:id="@+id/houseIDTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:text="@string/houseid"
         app:layout_constraintEnd_toEndOf="@+id/test"
         app:layout_constraintStart_toStartOf="@+id/test"

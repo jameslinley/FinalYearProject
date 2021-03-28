@@ -18,19 +18,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerMessages"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/messageTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
 
     <EditText
         android:id="@+id/messageTxt"
@@ -44,6 +40,7 @@
         android:autofillHints=""
         android:background="@drawable/send_a_message"
         android:hint="@string/write_a_message"
+        android:text=""
         android:inputType="text"
         android:maxHeight="200dp"
         android:minHeight="48dp"
@@ -54,11 +51,9 @@
         android:paddingEnd="15dp"
         android:paddingRight="15dp"
         android:paddingBottom="1dp"
-        android:text=""
-        android:textColor="#FF000000"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sendButton"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton

@@ -3,12 +3,14 @@ package com.example.housem8;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -26,47 +28,38 @@ import java.util.Objects;
 
 public class MessagesActivity extends AppCompatActivity {
 
-    private EditText mesTxtEt;
+    private EditText messageInput;
     private ImageButton sendBtn;
-    private RecyclerView recView;
-    private TextView housemateNameTextView;
+    private RecyclerView recyclerView;
     private ArrayList<Chat> messages;
-    private ArrayList<String> housemates;
-    private ArrayList<Integer> houseIDs;
-    private com.google.firebase.auth.FirebaseUser FirebaseUser;
-    private DatabaseReference databaseReference;
-    private String uid;
-    private String housemateNameString, housemateEmail, houseId;
-
+    private String housemateName, housemateEmail, housemateHouseID, houseID;
+    private MessageAdapter messageAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
-        
-        mesTxtEt = findViewById(R.id.messageTxt);
-        sendBtn = findViewById(R.id.sendButton);
-        recView = findViewById(R.id.RecyclerMessages);
-        messages = new ArrayList<>();
-        housemates = new ArrayList<>();
-        houseIDs = new ArrayList<>();
 
-        housemateNameString = getIntent().getStringExtra("housemate_name");
+        housemateName = getIntent().getStringExtra("housemate_name");
         housemateEmail = getIntent().getStringExtra("housemate_email");
-        housemateNameTextView.setText(housemateNameString);
+        housemateHouseID = getIntent().getStringExtra("housemate_houseID");
 
-        //senderName =
-        //recipientName =
-        FirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("user");
-        uid = FirebaseUser.getUid();
+        recyclerView = findViewById(R.id.RecyclerMessages);
+        messageInput = findViewById(R.id.messageTxt);
+        sendBtn = findViewById(R.id.sendButton);
 
 
-        
+        messages = new ArrayList<>();
+
+        messageAdapter = new MessageAdapter(messages, getIntent().getStringExtra("housemate_name"), MessagesActivity.this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(messageAdapter);
+
+
         toolBar();
-
-
+        setupMessages();
+        sendButton();
 
     }
 
@@ -85,11 +78,57 @@ public class MessagesActivity extends AppCompatActivity {
 
     public void toolBar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Messages");
+        toolbar.setTitle(housemateName);
         setSupportActionBar(toolbar);
-
         //below was getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void setupMessages(){
+        FirebaseDatabase.getInstance().getReference("user/" + FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String hid = snapshot.getValue(HouseMate.class).getHouseID();
+                houseID = hid + housemateHouseID;
+                messageListener(houseID);
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void messageListener(String houseID){
+        FirebaseDatabase.getInstance().getReference("messages/" + houseID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                messages.clear();
+                for (DataSnapshot d : snapshot.getChildren()){
+                    messages.add(d.getValue(Chat.class));
+                }
+                messageAdapter.notifyDataSetChanged();
+                recyclerView.scrollToPosition(messages.size()-1);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    public void sendButton(){
+        sendBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase.getInstance().getReference("messages/" + houseID).push().setValue(new Chat(FirebaseAuth.getInstance().getCurrentUser().getEmail(),housemateEmail, messageInput.getText().toString()));
+                messageInput.setText("");
+            }
+        });
     }
 
 

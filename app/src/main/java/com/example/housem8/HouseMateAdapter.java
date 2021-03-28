@@ -44,14 +44,14 @@ public class HouseMateAdapter extends RecyclerView.Adapter<HouseMateAdapter.Hous
 
     @Override
     public void onBindViewHolder(@NonNull HouseMateHolder holder, int position) {
-        holder.nameOfHouseMate.setText(housemates.get(position).getName());
+        holder.nameOfHousemate.setText(housemates.get(position).getName());
     }
 
     public class HouseMateHolder extends RecyclerView.ViewHolder {
-        private TextView nameOfHouseMate;
+        private TextView nameOfHousemate;
         public HouseMateHolder(@NonNull View itemView) {
             super(itemView);
-            
+
             itemView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view){
@@ -60,9 +60,9 @@ public class HouseMateAdapter extends RecyclerView.Adapter<HouseMateAdapter.Hous
 
                }
             });
-    
-            nameOfHouseMate = itemView.findViewById(R.id.name_of_housemate);
-            
+
+            nameOfHousemate = itemView.findViewById(R.id.name_of_housemate);
+
         }
     }
 }

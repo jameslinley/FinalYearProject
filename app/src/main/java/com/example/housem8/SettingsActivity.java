@@ -24,9 +24,9 @@ import java.util.Random;
 public class SettingsActivity extends AppCompatActivity {
 
     private Button logoutBtn;
-    private TextView dname, houseIDTxt;
+    private TextView dname, houseIDTxt, housemateIDTxt;
     private FirebaseUser FirebaseUser;
-    private DatabaseReference databaseReference;
+    private DatabaseReference dbref;
     private String uid;
 
 
@@ -37,22 +37,23 @@ public class SettingsActivity extends AppCompatActivity {
         logoutBtn = findViewById(R.id.logout_button);
         dname = findViewById(R.id.test);
         houseIDTxt = findViewById(R.id.houseIDTxt);
+        housemateIDTxt = findViewById(R.id.housemateIDTxt);
         FirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        dbref = FirebaseDatabase.getInstance().getReference("user");
         uid = FirebaseUser.getUid();
 
         toolBar();
         logOut();
         displayName();
         setHouseID();
+        setHousemateID();
     }
     public void toolBar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Settings");
 
-        //below was getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void logOut(){
@@ -66,7 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void displayName(){
-        databaseReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        dbref.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 HouseMate houseMate = snapshot.getValue(HouseMate.class);
@@ -84,13 +85,31 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void setHouseID(){
-        databaseReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        dbref.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 HouseMate houseMate = snapshot.getValue(HouseMate.class);
                 if(houseMate != null){
-                    String hID = houseMate.getHouseID();
-                    houseIDTxt.setText(hID);
+                    String s = houseMate.getHouseID();
+                    houseIDTxt.setText(s);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void setHousemateID(){
+        dbref.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HouseMate houseMate = snapshot.getValue(HouseMate.class);
+                if(houseMate != null){
+                    String s = houseMate.getHousemateID();
+                    housemateIDTxt.setText(s);
                 }
             }
 
