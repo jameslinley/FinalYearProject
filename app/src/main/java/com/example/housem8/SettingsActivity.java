@@ -19,7 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -35,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         logoutBtn = findViewById(R.id.logout_button);
-        dname = findViewById(R.id.test);
+        dname = findViewById(R.id.settingsName);
         houseIDTxt = findViewById(R.id.houseIDTxt);
         housemateIDTxt = findViewById(R.id.housemateIDTxt);
         FirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -53,16 +52,13 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle("Settings");
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
     public void logOut(){
-        logoutBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(SettingsActivity.this, LogInActivity.class));
-            }
+        logoutBtn.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(SettingsActivity.this, LogInActivity.class));
         });
     }
 

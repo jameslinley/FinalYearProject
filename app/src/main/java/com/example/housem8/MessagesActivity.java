@@ -52,9 +52,12 @@ public class MessagesActivity extends AppCompatActivity {
 
         messages = new ArrayList<>();
 
+
+
         messageAdapter = new MessageAdapter(messages, getIntent().getStringExtra("housemate_name"), MessagesActivity.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(messageAdapter);
+
 
 
         toolBar();
@@ -111,6 +114,7 @@ public class MessagesActivity extends AppCompatActivity {
                 }
                 messageAdapter.notifyDataSetChanged();
                 recyclerView.scrollToPosition(messages.size()-1);
+
             }
 
             @Override

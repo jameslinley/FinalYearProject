@@ -6,16 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
-    <TextView
-        android:id="@+id/housemateIDTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/houseid"
-        app:layout_constraintEnd_toEndOf="@+id/houseIDTxt"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/houseIDTxt"
-        app:layout_constraintTop_toBottomOf="@+id/houseIDTxt" />
+
 
     <include
         android:id="@+id/toolbar"
@@ -30,33 +21,96 @@
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="540dp"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/register_button"
+        android:fontFamily="@font/lato"
         android:text="@string/log_out"
-        android:textSize="24sp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/your_name"
+        android:fontFamily="@font/lato"
+        android:textColor="@color/charcoal"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/test"
+        android:id="@+id/settingsName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/textview"
-        app:layout_constraintBottom_toTopOf="@+id/logout_button"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/lato"
+        android:text="@string/name"
+        android:textColor="@color/charcoal"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/housemateid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:fontFamily="@font/lato"
+        android:text="Your ID"
+        android:textColor="@color/charcoal"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsName" />
+
+    <TextView
+        android:id="@+id/housemateIDTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/lato"
+        android:text="@string/housemateid"
+        android:textColor="@color/charcoal"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/housemateid"
+        app:layout_constraintStart_toStartOf="@+id/housemateid"
+        app:layout_constraintTop_toBottomOf="@+id/housemateid" />
+
+    <TextView
+        android:id="@+id/houseID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:fontFamily="@font/lato"
+        android:text="House ID"
+        android:textColor="@color/charcoal"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/housemateIDTxt" />
 
     <TextView
         android:id="@+id/houseIDTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/lato"
         android:text="@string/houseid"
-        app:layout_constraintEnd_toEndOf="@+id/test"
-        app:layout_constraintStart_toStartOf="@+id/test"
-        app:layout_constraintTop_toBottomOf="@+id/test" />
+        android:textColor="@color/charcoal"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/houseID"
+        app:layout_constraintStart_toStartOf="@+id/houseID"
+        app:layout_constraintTop_toBottomOf="@+id/houseID" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

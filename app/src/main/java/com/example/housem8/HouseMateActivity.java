@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -104,6 +105,7 @@ public class HouseMateActivity extends AppCompatActivity {
                 houseMateAdapter = new HouseMateAdapter(housemates, HouseMateActivity.this, onHouseMateClickListener);
                 recyclerView.setLayoutManager(new LinearLayoutManager(HouseMateActivity.this));
                 recyclerView.setAdapter(houseMateAdapter);
+
 
 
             }

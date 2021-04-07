@@ -30,4 +30,11 @@
     <string name="textview">TextView</string>
     <string name="houseid">houseID</string>
     <string name="this_is_a_test_user">This is a test user</string>
+    <string name="notice_title">Notice Title</string>
+    <string name="title">Title</string>
+    <string name="notice">Notice</string>
+    <string name="save">Save</string>
+    <string name="housemateid">housemateID</string>
+    <string name="name">name</string>
+    <string name="your_name">Your name</string>
 </resources>
