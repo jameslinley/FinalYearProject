@@ -46,13 +46,6 @@ public class NoticeboardActivity extends AppCompatActivity {
 
         HashSet<String> set = (HashSet<String>) sharedPreferences.getStringSet("notices", null);
 
-//        if (set == null) {
-//            notices.add("Example notice");
-//        } else {
-//            notices = new ArrayList(set);
-//        }
-
-
 
         toolBar();
         addNotice();

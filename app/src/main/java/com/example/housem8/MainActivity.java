@@ -41,13 +41,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //method to show toolbar on each page
     public void toolBar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    //methods to navigate to certain Activities
     public void CalendarMessageSetUp(){
         calButton.setOnClickListener(new View.OnClickListener() {
             @Override

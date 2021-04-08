@@ -40,52 +40,25 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
         View view = LayoutInflater.from(context).inflate(R.layout.chat_layout, parent, false);
         return new MessageHolder(view);
 
-//        View view;
-//        if (viewType == MSG_TYPE_RIGHT) {
-//            view = LayoutInflater.from(context).inflate(R.layout.my_layout, parent, false);
-//        } else {
-//            view = LayoutInflater.from(context).inflate(R.layout.their_layout, parent, false);
-//        }
-//        return new MessageHolder(view);
     }
-
-//    @Override
-//    public int getItemViewType(int position){
-//        if (messages.get(position).getSender().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-//            return MSG_TYPE_RIGHT;
-//        } else {
-//            return MSG_TYPE_LEFT;
-//        }
-//    }
-
-
 
     @Override
     public void onBindViewHolder(@NonNull MessageHolder holder, int position) {
         holder.mSent.setText(messages.get(position).getContent());
-//        holder.mReceived.setText(messages.get(position).getContent());
-//        holder.name.setText(nameOfSender);
 
         ConstraintLayout chatLayout = holder.chatLayout;
-
-//        ConstraintLayout myLayout = holder.myLayout;
-//        ConstraintLayout theirLayout = holder.theirLayout;
 
 
         if (messages.get(position).getSender().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
             ConstraintSet cSet = new ConstraintSet();
             cSet.clone(chatLayout);
-//            cSet.clear(R.id.name_of_sender, ConstraintSet.LEFT);
             cSet.clear(R.id.my_message, ConstraintSet.LEFT);
-//            cSet.connect(R.id.name_of_sender, ConstraintSet.RIGHT, R.id.my_layout, ConstraintSet.RIGHT,0);
             cSet.connect(R.id.my_message, ConstraintSet.RIGHT, R.id.chat_layout, ConstraintSet.LEFT,0);
             cSet.applyTo(chatLayout);
         } else {
             ConstraintSet cSet = new ConstraintSet();
             cSet.clone(chatLayout);
-//            cSet.clear(R.id.name_of_sender, ConstraintSet.RIGHT);
             cSet.clear(R.id.my_message, ConstraintSet.RIGHT);
-//            cSet.connect(R.id.name_of_sender, ConstraintSet.LEFT, R.id.their_layout, ConstraintSet.LEFT,0);
             cSet.connect(R.id.my_message, ConstraintSet.LEFT, R.id.chat_layout, ConstraintSet.RIGHT,0);
             cSet.applyTo(chatLayout);
 
@@ -105,12 +78,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
         public MessageHolder(@NonNull View itemView) {
             super(itemView);
 
-//            myLayout = itemView.findViewById(R.id.my_layout);
-//            theirLayout = itemView.findViewById(R.id.their_layout);
             chatLayout = itemView.findViewById(R.id.chat_layout);
             mSent = itemView.findViewById(R.id.my_message);
-//            mReceived = itemView.findViewById(R.id.their_message);
-//            name = itemView.findViewById(R.id.name_of_sender);
 
 
         }

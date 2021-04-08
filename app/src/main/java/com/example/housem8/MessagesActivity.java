@@ -49,9 +49,8 @@ public class MessagesActivity extends AppCompatActivity {
         messageInput = findViewById(R.id.messageTxt);
         sendBtn = findViewById(R.id.sendButton);
 
-
+        
         messages = new ArrayList<>();
-
 
 
         messageAdapter = new MessageAdapter(messages, getIntent().getStringExtra("housemate_name"), MessagesActivity.this);
@@ -129,7 +128,12 @@ public class MessagesActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                FirebaseDatabase.getInstance().getReference("messages/" + houseID).push().setValue(new Chat(FirebaseAuth.getInstance().getCurrentUser().getEmail(),housemateEmail, messageInput.getText().toString()));
+                FirebaseDatabase.getInstance().getReference("messages/" + houseID)
+                        .push()
+                        .setValue(new Chat(FirebaseAuth.getInstance()
+                                .getCurrentUser()
+                                .getEmail(),housemateEmail, messageInput.getText()
+                                .toString()));
                 messageInput.setText("");
             }
         });
