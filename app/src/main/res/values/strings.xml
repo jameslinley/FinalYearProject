@@ -22,7 +22,6 @@
     <string name="placeholder_message">Placeholder message</string>
     <string name="register">Register</string>
     <string name="log_in">Log in</string>
-    <string name="already_registered_log_in_here">Already registered? Log in here</string>
     <string name="settings_menu_item">Settings Menu Item</string>
     <string name="housem8">HouseM8</string>
     <string name="log_out">log out</string>
@@ -35,6 +34,10 @@
     <string name="notice">Notice</string>
     <string name="save">Save</string>
     <string name="housemateid">housemateID</string>
-    <string name="name">name</string>
     <string name="your_name">Your name</string>
+    <string name="already_registered">Already registered?</string>
+    <string name="log_in_here">LOG IN HERE</string>
+    <string name="name"><i>Name</i></string>
+    <string name="email_address"><i>Email address</i></string>
+    <string name="password"><i>Password</i></string>
 </resources>
