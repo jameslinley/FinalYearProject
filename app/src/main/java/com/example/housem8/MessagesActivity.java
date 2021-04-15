@@ -3,8 +3,6 @@ package com.example.housem8;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,27 +11,38 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.scaledrone.lib.Listener;
+import com.scaledrone.lib.Room;
+import com.scaledrone.lib.RoomListener;
+import com.scaledrone.lib.Scaledrone;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
-public class MessagesActivity extends AppCompatActivity {
+public class MessagesActivity extends AppCompatActivity implements RoomListener{
 
+
+    private String housemateName, housemateEmail;
+    private String name;
+
+    private String channelID = "JVPx7XpHmmkhj8Lp";
+    private String roomName = "observable-room";
     private EditText messageInput;
-    private ImageButton sendBtn;
-    private RecyclerView recyclerView;
-    private ArrayList<Chat> messages;
-    private String housemateName, housemateEmail, housemateHouseID, houseID;
+    private Scaledrone scaledrone;
     private MessageAdapter messageAdapter;
+    private ListView messagesView;
+
+
+
 
 
     @Override
@@ -41,27 +50,40 @@ public class MessagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
-        housemateName = getIntent().getStringExtra("housemate_name");
-        housemateEmail = getIntent().getStringExtra("housemate_email");
-        housemateHouseID = getIntent().getStringExtra("housemate_houseID");
-
-        recyclerView = findViewById(R.id.RecyclerMessages);
-        messageInput = findViewById(R.id.messageTxt);
-        sendBtn = findViewById(R.id.sendButton);
-
-        
-        messages = new ArrayList<>();
+        messageInput = (EditText) findViewById(R.id.editText);
+        messageAdapter = new MessageAdapter(this);
+        messagesView = (ListView) findViewById(R.id.messages_view);
+        messagesView.setAdapter(messageAdapter);
 
 
-        messageAdapter = new MessageAdapter(messages, getIntent().getStringExtra("housemate_name"), MessagesActivity.this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(messageAdapter);
+        HouseMate data = new HouseMate("Name");
 
+        scaledrone = new Scaledrone(channelID, data);
+        scaledrone.connect(new Listener() {
+            @Override
+            public void onOpen() {
+                System.out.println("Scaledrone connection open");
+                // Since the MainActivity itself already implement RoomListener we can pass it as a target
+                scaledrone.subscribe(roomName, MessagesActivity.this);
+            }
 
+            @Override
+            public void onOpenFailure(Exception ex) {
+                System.err.println(ex);
+            }
+
+            @Override
+            public void onFailure(Exception ex) {
+                System.err.println(ex);
+            }
+
+            @Override
+            public void onClosed(String reason) {
+                System.err.println(reason);
+            }
+        });
 
         toolBar();
-        setupMessages();
-        sendButton();
 
     }
 
@@ -80,64 +102,50 @@ public class MessagesActivity extends AppCompatActivity {
 
     public void toolBar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(housemateName);
+        toolbar.setTitle("Messages");
         setSupportActionBar(toolbar);
-        //below was getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
-    public void setupMessages(){
-        FirebaseDatabase.getInstance().getReference("user/" + FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String hid = snapshot.getValue(HouseMate.class).getHouseID();
-                houseID = hid + housemateHouseID;
-                messageListener(houseID);
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+    public void sendMessage(View view) {
+        String message = messageInput.getText().toString();
+        if (message.length() > 0) {
+            scaledrone.publish("observable-room", message);
+            messageInput.getText().clear();
+        }
     }
 
-    public void messageListener(String houseID){
-        FirebaseDatabase.getInstance().getReference("messages/" + houseID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                messages.clear();
-                for (DataSnapshot d : snapshot.getChildren()){
-                    messages.add(d.getValue(Chat.class));
-                }
-                messageAdapter.notifyDataSetChanged();
-                recyclerView.scrollToPosition(messages.size()-1);
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
+    // Successfully connected to Scaledrone room
+    @Override
+    public void onOpen(Room room) {
+        System.out.println("Connected to room");
     }
 
-    public void sendButton(){
-        sendBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase.getInstance().getReference("messages/" + houseID)
-                        .push()
-                        .setValue(new Chat(FirebaseAuth.getInstance()
-                                .getCurrentUser()
-                                .getEmail(),housemateEmail, messageInput.getText()
-                                .toString()));
-                messageInput.setText("");
-            }
-        });
+    // Connecting to Scaledrone room failed
+    @Override
+    public void onOpenFailure(Room room, Exception ex) {
+        System.err.println(ex);
     }
+
+    // Received a message from Scaledrone room
+    @Override
+    public void onMessage(Room room, com.scaledrone.lib.Message receivedMessage) {
+        final ObjectMapper mapper = new ObjectMapper();
+        try {
+            final HouseMate data = mapper.treeToValue(receivedMessage.getMember().getClientData(), HouseMate.class);
+            boolean belongsToCurrentUser = receivedMessage.getClientID().equals(scaledrone.getClientID());
+            final Message message = new Message(receivedMessage.getData().asText(), data, belongsToCurrentUser);
+            runOnUiThread(() -> {
+                messageAdapter.add(message);
+                messagesView.setSelection(messagesView.getCount() - 1);
+            });
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 }

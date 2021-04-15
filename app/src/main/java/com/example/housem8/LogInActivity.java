@@ -91,8 +91,7 @@ public class LogInActivity extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference("user/"+ Objects.requireNonNull(FirebaseAuth.getInstance()
                             .getCurrentUser())
                             .getUid())
-                            .setValue(new HouseMate(nameTxt.getText().toString(),
-                                    emailTxt.getText().toString()));
+                            .setValue(new HouseMate(nameTxt.getText().toString()));
                     Toast.makeText(LogInActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                     postRegistered();
                 } else {

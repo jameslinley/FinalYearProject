@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         mesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HouseMateActivity.class));
+                startActivity(new Intent(MainActivity.this, MessagesActivity.class));
             }
         });
     }

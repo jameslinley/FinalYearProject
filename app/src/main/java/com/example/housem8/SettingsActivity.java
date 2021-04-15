@@ -41,6 +41,8 @@ public class SettingsActivity extends AppCompatActivity {
         dbref = FirebaseDatabase.getInstance().getReference("user");
         uid = FirebaseUser.getUid();
 
+
+
         toolBar();
         logOut();
         displayName();
@@ -54,6 +56,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
+
+
 
     public void logOut(){
         logoutBtn.setOnClickListener(view -> {
@@ -115,6 +119,8 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 
 

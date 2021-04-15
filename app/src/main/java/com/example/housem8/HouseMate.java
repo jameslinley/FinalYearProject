@@ -14,13 +14,15 @@ public class HouseMate {
     private String housemateID;
     private String houseID;
 
+    private String colour;
+
     public HouseMate(){}
 
-    public HouseMate(String name, String email) {
+    public HouseMate(String name) {
         this.name = name;
-        this.email = email;
         setHousemateID();
         setHouseID();
+        generateColour();
     }
 
 
@@ -78,5 +80,22 @@ public class HouseMate {
         }
         housemateID = sb2.toString();
     }
+
+    public void generateColour() {
+        Random r = new Random();
+        StringBuilder sb = new StringBuilder("#");
+        while(sb.length() < 7){
+            sb.append(Integer.toHexString(r.nextInt()));
+        }
+        colour = sb.toString().substring(0, 7);
+    }
+
+    public String getColour(){
+        return colour;
+    }
+
+
+
+
 
 }

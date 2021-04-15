@@ -1,88 +1,80 @@
 package com.example.housem8;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
-
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageHolder> {
-
-    private ArrayList<Chat> messages;
-    private String nameOfSender;
-    private Context context;
-
-    public static final int MSG_TYPE_RIGHT = 0;
-    public static final int MSG_TYPE_LEFT = 1;
+import java.util.List;
 
 
-    public MessageAdapter(ArrayList<Chat> messages, String nameOfSender, Context context) {
-        this.messages = messages;
-        this.nameOfSender = nameOfSender;
+public class MessageAdapter extends BaseAdapter {
+
+    List<Message> messages = new ArrayList<Message>();
+    Context context;
+
+    public MessageAdapter(Context context) {
         this.context = context;
     }
 
 
-    @NonNull
-    @Override
-    public MessageHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(context).inflate(R.layout.chat_layout, parent, false);
-        return new MessageHolder(view);
-
+    public void add(Message message) {
+        this.messages.add(message);
+        notifyDataSetChanged();
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageHolder holder, int position) {
-        holder.mSent.setText(messages.get(position).getContent());
-
-        ConstraintLayout chatLayout = holder.chatLayout;
-
-
-        if (messages.get(position).getSender().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
-            ConstraintSet cSet = new ConstraintSet();
-            cSet.clone(chatLayout);
-            cSet.clear(R.id.my_message, ConstraintSet.LEFT);
-            cSet.connect(R.id.my_message, ConstraintSet.RIGHT, R.id.chat_layout, ConstraintSet.LEFT,0);
-            cSet.applyTo(chatLayout);
-        } else {
-            ConstraintSet cSet = new ConstraintSet();
-            cSet.clone(chatLayout);
-            cSet.clear(R.id.my_message, ConstraintSet.RIGHT);
-            cSet.connect(R.id.my_message, ConstraintSet.LEFT, R.id.chat_layout, ConstraintSet.RIGHT,0);
-            cSet.applyTo(chatLayout);
-
-
-        }
-    }
-
-    @Override
-    public int getItemCount() {
+    public int getCount() {
         return messages.size();
     }
 
-    public class MessageHolder extends RecyclerView.ViewHolder{
-        private ConstraintLayout myLayout, theirLayout, chatLayout;
-        private TextView mSent, mReceived, name;
-
-        public MessageHolder(@NonNull View itemView) {
-            super(itemView);
-
-            chatLayout = itemView.findViewById(R.id.chat_layout);
-            mSent = itemView.findViewById(R.id.my_message);
-
-
-        }
+    @Override
+    public Object getItem(int i) {
+        return messages.get(i);
     }
 
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    @Override
+    public View getView(int i, View convertView, ViewGroup viewGroup) {
+        MessageViewHolder holder = new MessageViewHolder();
+        LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        Message message = messages.get(i);
+
+        if (message.isBelongsToCurrentUser()) {
+            convertView = messageInflater.inflate(R.layout.my_message, null);
+            holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
+            convertView.setTag(holder);
+            holder.messageBody.setText(message.getText());
+        } else {
+            convertView = messageInflater.inflate(R.layout.their_message, null);
+            holder.avatar = (View) convertView.findViewById(R.id.avatar);
+            holder.name = (TextView) convertView.findViewById(R.id.nameText);
+            holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
+            convertView.setTag(holder);
+
+            holder.name.setText(message.getMemberData().getName());
+            holder.messageBody.setText(message.getText());
+            GradientDrawable drawable = (GradientDrawable) holder.avatar.getBackground();
+            drawable.setColor(Color.parseColor(message.getMemberData().getColour()));
+        }
+
+        return convertView;
+    }
+
+}
+
+class MessageViewHolder {
+    public View avatar;
+    public TextView name;
+    public TextView messageBody;
 }
