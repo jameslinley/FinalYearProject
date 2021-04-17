@@ -44,7 +44,6 @@ public class CalendarActivity extends AppCompatActivity {
         toolbar.setTitle("Calendar");
         setSupportActionBar(toolbar);
 
-        //below was getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 }

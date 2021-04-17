@@ -43,4 +43,5 @@
     <string name="button_label">Send</string>
     <string name="toast_message">Hurra!</string>
     <string name="input_placeholder">Write a message</string>
+    <string name="test_message">This message a test message</string>
 </resources>

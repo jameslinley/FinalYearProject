@@ -47,30 +47,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void CalendarMessageSetUp(){
-        calButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CalendarActivity.class));
-            }
-        });
+        calButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CalendarActivity.class)));
     }
 
     public void MessageButtonSetUp(){
-        mesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MessagesActivity.class));
-            }
-        });
+        mesButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MessagesActivity.class)));
     }
 
     public void NoticeboardButtonSetUp(){
-        notButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, NoticeboardActivity.class));
-            }
-        });
+        notButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, NoticeboardActivity.class)));
     }
 
     @Override

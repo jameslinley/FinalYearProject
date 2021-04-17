@@ -2,10 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="10dp"
+    android:paddingVertical="3dp"
     android:paddingLeft="15dp"
     android:paddingRight="60dp"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:paddingStart="15dp"
+    android:paddingEnd="60dp">
 
     <View
         android:id="@+id/avatar"
@@ -13,7 +15,8 @@
         android:scaleType="centerInside"
         android:background="@drawable/circle"
         android:layout_width="34dp"
-        android:layout_height="34dp" />
+        android:layout_height="34dp"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/nameText"
@@ -23,7 +26,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="4dp"
-        android:text=""/>
+        android:fontFamily="@font/lato"
+        android:textColor="@color/charcoal"
+        android:text=""
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/avatar" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,10 +39,11 @@
         android:layout_below="@+id/nameText"
         android:layout_alignLeft="@+id/nameText"
         android:background="@drawable/their_message"
-        android:paddingVertical="12dp"
-        android:paddingHorizontal="16dp"
-        android:elevation="2dp"
-        android:textSize="18dp"
-        android:text=""
-        />
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="8dp"
+        android:textSize="18sp"
+        android:textColor="@color/charcoal"
+        android:fontFamily="@font/lato"
+        android:text="@string/test_message"
+        android:layout_alignStart="@+id/nameText" />
 </RelativeLayout>

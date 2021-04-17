@@ -2,22 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="10dp"
+    android:paddingVertical="3dp"
     android:paddingRight="15dp"
     android:paddingLeft="60dp"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:paddingEnd="15dp"
+    android:paddingStart="60dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/message_body"
         android:background="@drawable/my_message"
-        android:textColor="#fff"
+        android:textColor="@color/white"
         android:padding="10dp"
-        android:elevation="2dp"
-        android:textSize="18dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/lato"
         android:layout_alignParentRight="true"
-        android:text="Placeholder message"
-        />
+        android:text="@string/test_message"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
