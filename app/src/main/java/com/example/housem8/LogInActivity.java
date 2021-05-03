@@ -1,6 +1,5 @@
 package com.example.housem8;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -11,15 +10,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.Objects;
 
+/**
+ * LogInActivity class
+ * Author: Maid Rondić (2020)
+ * Title: Build Chat App in Android with Java and Firebase
+ * Available at: https://www.skillshare.com/classes/Build-Chat-App-in-Android-with-Java-and-Firebase/1043151393/lessons
+ * Lesson: 2
+ *
+ */
 public class LogInActivity extends AppCompatActivity {
 
     private EditText nameTxt, emailTxt, pwordTxt;
@@ -47,6 +49,16 @@ public class LogInActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * changeText() method
+     * Author: Maid Rondić (2020)
+     * Title: Build Chat App in Android with Java and Firebase
+     * Available at: https://www.skillshare.com/classes/Build-Chat-App-in-Android-with-Java-and-Firebase/1043151393/lessons
+     * Lesson: 2
+     *
+     * method to change the text of registerBtn, alreadyRegisteredTxt and loginRegisterHereTxt
+     * depending on if the user is registered or not
+     */
     public void changeText(){
         loginRegisterHereTxt.setOnClickListener(view -> {
             if (isRegistering){
@@ -65,6 +77,16 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * setUpButtons() method
+     * Author: Maid Rondić (2020)
+     * Title: Build Chat App in Android with Java and Firebase
+     * Available at: https://www.skillshare.com/classes/Build-Chat-App-in-Android-with-Java-and-Firebase/1043151393/lessons
+     * Lesson: 2
+     *
+     * method when registerBtn is clicked to call either register() or login(),
+     * depending on if the user is registered or not
+     */
     public void setUpButtons() {
         registerBtn.setOnClickListener(view -> {
             if(isRegistering){
@@ -75,6 +97,15 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * register() method
+     * Author: Maid Rondić (2020)
+     * Title: Build Chat App in Android with Java and Firebase
+     * Available at: https://www.skillshare.com/classes/Build-Chat-App-in-Android-with-Java-and-Firebase/1043151393/lessons
+     * Lesson: 2
+     *
+     * method to register a user to Firebase database
+     */
     public void register(){
         if (emailTxt.getText().toString().isEmpty()) {
             Toast.makeText(LogInActivity.this, "Email field is empty", Toast.LENGTH_SHORT).show();
@@ -102,6 +133,15 @@ public class LogInActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * postRegistered() method
+     * Author: Maid Rondić (2020)
+     * Title: Build Chat App in Android with Java and Firebase
+     * Available at: https://www.skillshare.com/classes/Build-Chat-App-in-Android-with-Java-and-Firebase/1043151393/lessons
+     * Lesson: 2
+     *
+     * method to change text values after user is registered
+     */
     public void postRegistered(){
         isRegistering = false;
         registerBtn.setText("Log in");
@@ -113,6 +153,15 @@ public class LogInActivity extends AppCompatActivity {
         pwordTxt.setText("");
     }
 
+    /**
+     * logIn() method
+     * Author: Maid Rondić (2020)
+     * Title: Build Chat App in Android with Java and Firebase
+     * Available at: https://www.skillshare.com/classes/Build-Chat-App-in-Android-with-Java-and-Firebase/1043151393/lessons
+     * Lesson: 2
+     *
+     * method to log the user in after successful registration
+     */
     public void logIn(){
         FirebaseAuth.getInstance().signInWithEmailAndPassword(emailTxt.getText().toString(), pwordTxt.getText().toString())
                 .addOnCompleteListener(task -> {
@@ -125,6 +174,15 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * loggedIn() method
+     * Author: Maid Rondić (2020)
+     * Title: Build Chat App in Android with Java and Firebase
+     * Available at: https://www.skillshare.com/classes/Build-Chat-App-in-Android-with-Java-and-Firebase/1043151393/lessons
+     * Lesson: 2
+     *
+     * method to check whether user is already logged in after closing app
+     */
     public void loggedIn(){
         if (FirebaseAuth.getInstance().getCurrentUser()!=null){
             startActivity(new Intent(LogInActivity.this, MainActivity.class));

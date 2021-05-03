@@ -30,21 +30,33 @@ public class AddNotice extends AppCompatActivity {
         notice = findViewById(R.id.notice_input);
         save = findViewById(R.id.save_notice);
 
-
-
-
-
         toolBar();
         noticeIDMethod();
         saveNoticeText();
     }
 
+    /**
+     * toolBar() method
+     * Author@ Coding in Flow (2017)
+     * Title: How to Add an Up Button to the AppBar - Android Studio Tutorial
+     * Available at: https://www.youtube.com/watch?v=JkVdP-e9BCo&ab_channel=CodinginFlow
+     *
+     * sets name of current page in toolbar
+     */
     public void toolBar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("New Notice");
         setSupportActionBar(toolbar);
     }
 
+    /**
+     * noticeIDMethod() method
+     * Author: Developer PaniBus (2018)
+     * Title: Build a Note App with Android Studio, Java and Permanent Storage
+     * Available at: https://www.youtube.com/watch?v=48EB4HeP1kI&ab_channel=DeveloperPaniBus
+     *
+     * displays title of notice and saves to HashSet
+     */
     public void noticeIDMethod(){
         Intent intent = getIntent();
         noticeID = intent.getIntExtra("noticeID", -1);
@@ -64,6 +76,14 @@ public class AddNotice extends AppCompatActivity {
         }
     }
 
+    /**
+     * saveNoticeText method
+     * Author: Developer PaniBus (2018)
+     * Title: Build a Note App with Android Studio, Java and Permanent Storage
+     * Available at: https://www.youtube.com/watch?v=48EB4HeP1kI&ab_channel=DeveloperPaniBus
+     *
+     * saves title value to notices ArrayList in NoticeboardActivity class saves
+     */
     public void saveNoticeText(){
         title.addTextChangedListener(new TextWatcher() {
             @Override

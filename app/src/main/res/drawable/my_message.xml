@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    my_message.xml
+    Author: Scaledrone(2018)
+    Title: Android Chat Tutorial: Building A Realtime Messaging App
+    Available at: https://www.scaledrone.com/blog/android-chat-tutorial/
+-->
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">

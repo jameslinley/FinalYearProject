@@ -15,18 +15,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/nbRecView"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_marginHorizontal="5dp"-->
-<!--        android:layout_marginVertical="5dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/toolbar" />-->
-
+    <!--
+    activity_noticeboard.xml, ListView
+    Author: Developer PaniBus (2018)
+    Title: Build a Note App with Android Studio, Java and Permanent Storage
+    Available at: https://www.youtube.com/watch?v=48EB4HeP1kI&ab_channel=DeveloperPaniBus
+    -->
     <ListView
         android:id="@+id/nbListView"
         android:layout_width="0dp"

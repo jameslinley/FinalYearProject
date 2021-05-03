@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    gradient_login.xml
+    Author: Maid Rondić (2020)
+    Title: Build Chat App in Android with Java and Firebase
+    Available at: https://www.skillshare.com/classes/Build-Chat-App-in-Android-with-Java-and-Firebase/1043151393/lessons
+    Lesson: 2
+-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
         android:angle="270"

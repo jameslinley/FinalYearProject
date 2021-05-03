@@ -41,14 +41,21 @@ public class SettingsActivity extends AppCompatActivity {
         dbref = FirebaseDatabase.getInstance().getReference("user");
         uid = FirebaseUser.getUid();
 
-
-
         toolBar();
         logOut();
         displayName();
         setHouseID();
         setHousemateID();
     }
+
+    /**
+     * toolBar() method
+     * Author@ Coding in Flow (2017)
+     * Title: How to Add an Up Button to the AppBar - Android Studio Tutorial
+     * Available at: https://www.youtube.com/watch?v=JkVdP-e9BCo&ab_channel=CodinginFlow
+     *
+     * sets name of current page in toolbar and a back button to previous page
+     */
     public void toolBar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,15 +64,25 @@ public class SettingsActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
-
-
-    public void logOut(){
+    /**
+     * logs user out when logoutBtn is pressed and starts new LogInActivity activity
+     */
+    public void logOut() {
         logoutBtn.setOnClickListener(view -> {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(SettingsActivity.this, LogInActivity.class));
         });
     }
 
+    /**
+     * displayName() method
+     * Author: Maid Rondić (2020)
+     * Title: Build Chat App in Android with Java and Firebase
+     * Available at: https://www.skillshare.com/classes/Build-Chat-App-in-Android-with-Java-and-Firebase/1043151393/lessons
+     * Lesson: 7
+     *
+     * sets dname to name of current user
+     */
     public void displayName(){
         dbref.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -84,6 +101,9 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * sets houseIDTxt to housemateID of current user
+     */
     public void setHouseID(){
         dbref.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -102,6 +122,9 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * sets housemateIDTxt to houseID of current user
+     */
     public void setHousemateID(){
         dbref.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -119,9 +142,4 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
 }

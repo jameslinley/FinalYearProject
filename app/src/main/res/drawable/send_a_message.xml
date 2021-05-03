@@ -9,5 +9,4 @@
         android:color="@color/charcoal" />
     <solid
         android:color="@color/white" />
-
 </shape>

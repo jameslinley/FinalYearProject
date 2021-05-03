@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/logInActivity">
+
+    <activity
+        android:id="@+id/logInActivity"
+        android:name="com.example.housem8.LogInActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+    <activity
+        android:id="@+id/calendarActivity"
+        android:name="com.example.housem8.CalendarActivity"
+        android:label="activity_calendar"
+        tools:layout="@layout/activity_calendar" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.housem8.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/messagesActivity"
+        android:name="com.example.housem8.MessagesActivity"
+        android:label="activity_messages"
+        tools:layout="@layout/activity_messages" />
+    <activity
+        android:id="@+id/noticeboardActivity"
+        android:name="com.example.housem8.NoticeboardActivity"
+        android:label="activity_noticeboard"
+        tools:layout="@layout/activity_noticeboard" />
+    <activity
+        android:id="@+id/addNotice2"
+        android:name="com.example.housem8.AddNotice"
+        android:label="activity_add_notice"
+        tools:layout="@layout/activity_add_notice" />
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="com.example.housem8.SettingsActivity"
+        android:label="activity_settings"
+        tools:layout="@layout/activity_settings" />
+</navigation>

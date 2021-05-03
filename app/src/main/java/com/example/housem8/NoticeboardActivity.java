@@ -35,9 +35,77 @@ public class NoticeboardActivity extends AppCompatActivity {
         addNoticeBtn = findViewById(R.id.addNotice);
         listView = findViewById(R.id.nbListView);
         notices = new ArrayList<>();
+//        notices.add("Test notice");
 
-        notices.add("Test notice");
+        preferencesSetUp();
+        toolBar();
+        addNotice();
+        viewNotice();
+    }
 
+    /**
+     * adds settings_menu icon as a button in toolbar
+     * @param m
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu m) {
+        getMenuInflater().inflate(R.menu.settings_menu, m);
+        return true;
+    }
+
+    /**
+     * onOptionsItemSelected() method
+     * Author: Maid Rondić (2020)
+     * Title: Build Chat App in Android with Java and Firebase
+     * Available at: https://www.skillshare.com/classes/Build-Chat-App-in-Android-with-Java-and-Firebase/1043151393/projects
+     * Lesson: 4
+     *
+     * opens new SettingsActivity activity when pressed on settings_menu icon
+     * @param m
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem m) {
+        if (m.getItemId() == R.id.settings_menu_item) {
+            startActivity(new Intent(NoticeboardActivity.this, SettingsActivity.class));
+        }
+        return super.onOptionsItemSelected(m);
+    }
+
+    /**
+     * toolBar() method
+     * Author@ Coding in Flow (2017)
+     * Title: How to Add an Up Button to the AppBar - Android Studio Tutorial
+     * Available at: https://www.youtube.com/watch?v=JkVdP-e9BCo&ab_channel=CodinginFlow
+     *
+     * sets name of current page in toolbar and a back button to previous page
+     */
+    public void toolBar(){
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Noticeboard");
+        setSupportActionBar(toolbar);
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+
+    /**
+     * starts new addNotice activity when addNoticeBtn is pressed
+     */
+    public void addNotice(){
+        addNoticeBtn.setOnClickListener(v ->
+                startActivity(new Intent(NoticeboardActivity.this, AddNotice.class)));
+    }
+
+    /**
+     * preferencesSetUp() method
+     * Author: Developer PaniBus (2018)
+     * Title: Build a Note App with Android Studio, Java and Permanent Storage
+     * Available at: https://www.youtube.com/watch?v=48EB4HeP1kI&ab_channel=DeveloperPaniBus
+     *
+     * saves values in ListView and adds to notice ArrayList
+     */
+    public void preferencesSetUp(){
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, notices);
         listView.setAdapter(adapter);
 
@@ -46,51 +114,21 @@ public class NoticeboardActivity extends AppCompatActivity {
 
         HashSet<String> set = (HashSet<String>) sharedPreferences.getStringSet("notices", null);
 
-
-        toolBar();
-        addNotice();
-        viewNotice();
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu m) {
-        getMenuInflater().inflate(R.menu.settings_menu, m);
-        return true;
-    }
-    public boolean onOptionsItemSelected(MenuItem m) {
-        if (m.getItemId() == R.id.settings_menu_item) {
-            startActivity(new Intent(NoticeboardActivity.this, SettingsActivity.class));
-        }
-        return super.onOptionsItemSelected(m);
     }
 
-    public void toolBar(){
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Noticeboard");
-        setSupportActionBar(toolbar);
-
-        //below was getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-    }
-
-    public void addNotice(){
-        addNoticeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(NoticeboardActivity.this, AddNotice.class));
-            }
-        });
-    }
-
+    /**
+     * viewNotice() method
+     * Author: Developer PaniBus (2018)
+     * Title: Build a Note App with Android Studio, Java and Permanent Storage
+     * Available at: https://www.youtube.com/watch?v=48EB4HeP1kI&ab_channel=DeveloperPaniBus
+     *
+     * method to open AddNotice activity when pressed on listView item
+     */
     public void viewNotice(){
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
-                Intent intent = new Intent(getApplicationContext(), AddNotice.class);
-                intent.putExtra("noticeID", i);
-                startActivity(intent);
-            }
-
-
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent intent = new Intent(getApplicationContext(), AddNotice.class);
+            intent.putExtra("noticeID", i);
+            startActivity(intent);
         });
     }
 }
